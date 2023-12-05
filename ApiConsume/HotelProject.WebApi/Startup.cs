@@ -5,32 +5,31 @@ using HotelProject.DataAccessLayer.Concrete;
 using HotelProject.DataAccessLayer.EntityFramework;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HotelProject.WebApi
 {
     public class Startup
     {
+        private IConfiguration _configuration;
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<Context>();
+            //  services.AddDbContext<Context>();
+            services.AddDbContext<Context>(options =>
+            {
+                options.UseSqlServer(_configuration.GetConnectionString("Default"));
+            });
 
             services.AddScoped<IStaffDal,EfStaffDal>();
             services.AddScoped<IStaffService, StaffManager>();
@@ -49,6 +48,9 @@ namespace HotelProject.WebApi
 
             services.AddScoped<IAboutDal, EFAboutDal>();
             services.AddScoped<IAboutService, AboutManager>();
+
+            services.AddScoped<IBookingDal, EfBookingDal>();
+            services.AddScoped<IBookingService, BookingManager>();
 
             services.AddAutoMapper(typeof(Startup));
             

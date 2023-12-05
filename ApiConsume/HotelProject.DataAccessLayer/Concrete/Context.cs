@@ -11,9 +11,9 @@ namespace HotelProject.DataAccessLayer.Concrete
 {
     public class Context : IdentityDbContext<AppUser,AppRole,int>
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public Context(DbContextOptions<Context> options) : base(options) 
         {
-            optionsBuilder.UseSqlServer(@"server=localhost\SQL;database=HotelierApiDb;User Id=sa;Password=kenan4258; integrated security = true; Encrypt=false");
+            
         }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Service> Services { get; set; }
@@ -21,5 +21,6 @@ namespace HotelProject.DataAccessLayer.Concrete
         public DbSet<Subscribe> Subscribes { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
         public DbSet<About> Abouts { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
     }
 }
