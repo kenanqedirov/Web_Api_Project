@@ -26,7 +26,7 @@ namespace HotelProject.WebUI.Controllers
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<UpdateAboutDto>>(await jsonData);
+                var values = JsonConvert.DeserializeObject<List<ResultAboutDto>>(await jsonData);
                 return View(values);
             }
             return View();
@@ -40,13 +40,13 @@ namespace HotelProject.WebUI.Controllers
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var staff = JsonConvert.DeserializeObject<UpdateStaffViewModel>(jsonData);
+                var staff = JsonConvert.DeserializeObject<UpdateAboutDto>(jsonData);
                 return View(staff);
             }
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateAbout(UpdateStaffViewModel model)
+        public async Task<IActionResult> UpdateAbout(UpdateAboutDto model)
         {
             if (model is not null)
             {
