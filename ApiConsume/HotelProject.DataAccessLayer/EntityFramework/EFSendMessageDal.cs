@@ -2,6 +2,7 @@
 using HotelProject.DataAccessLayer.Concrete;
 using HotelProject.DataAccessLayer.Repository;
 using HotelProject.EntityLayer.Concrete;
+using System.Linq;
 
 namespace HotelProject.DataAccessLayer.EntityFramework
 {
@@ -10,6 +11,12 @@ namespace HotelProject.DataAccessLayer.EntityFramework
         public EFSendMessageDal(Context context) : base(context) 
         {
             
+        }
+
+        public int GetSendMessageCount()
+        {
+            var context = new Context();
+            return context.SendMessages.Count();
         }
     }
 }

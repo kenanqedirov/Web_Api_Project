@@ -25,11 +25,11 @@ namespace HotelProject.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
-            services.AddDbContext<Context>(options =>
-            {
-                options.UseSqlServer(_configuration.GetConnectionString("Default"));
-            });
+            services.AddDbContext<Context>();
+            //services.AddDbContext<Context>(options =>
+            //{
+            //    options.UseSqlServer(_configuration.GetConnectionString("Default"));
+            //});
 
             services.AddScoped<IStaffDal,EfStaffDal>();
             services.AddScoped<IStaffService, StaffManager>();
@@ -60,6 +60,12 @@ namespace HotelProject.WebApi
 
             services.AddScoped<ISendMessageDal, EFSendMessageDal>();
             services.AddScoped<ISendMessageService, SendMessageManager>();
+
+            services.AddScoped<IMessageCategoryDal, EFMessageCategoryDal>();
+            services.AddScoped<IMessageCategoryService, MessageCategoryManager>();
+
+            services.AddScoped<IWorkLocationDal, EfWorkLocationDal>();
+            services.AddScoped<IWorkLocationService, WorkLocationManager>();
 
             services.AddAutoMapper(typeof(Startup));
             

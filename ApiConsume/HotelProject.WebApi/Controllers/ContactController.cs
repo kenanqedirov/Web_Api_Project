@@ -32,8 +32,8 @@ namespace HotelProject.WebApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteContact(int id)
         {
-            var Contact = _contactService.TGetById(id);
-            _contactService.TDelete(Contact);
+            var contact = _contactService.TGetById(id);
+            _contactService.TDelete(contact);
             return Ok();
         }
         [HttpPut("UpdateContact")]
@@ -45,8 +45,14 @@ namespace HotelProject.WebApi.Controllers
         [HttpGet("{id}")]
         public IActionResult GetContact(int id)
         {
-            var Contact = _contactService.TGetById(id);
-            return Ok(Contact);
+            var contact = _contactService.TGetById(id);
+            return Ok(contact);
         }
+        [HttpGet("GetContactCount")]
+        public IActionResult GetContactCount()
+        {
+            return Ok(_contactService.TGetConactCount());
+        }
+        
     }
 }

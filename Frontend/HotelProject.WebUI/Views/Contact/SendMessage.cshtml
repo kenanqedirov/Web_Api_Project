@@ -38,6 +38,7 @@
                                     <input type="text" asp-for="Name"  class="form-control" id="name" placeholder="Your Name">
                                     <label for="name">Your Name</label>
                                 </div>
+
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
@@ -49,6 +50,12 @@
                                 <div class="form-floating">
                                     <input type="text" asp-for="Subject" class="form-control" id="subject" placeholder="Subject">
                                     <label for="subject">Subject</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    @Html.DropDownListFor(x=>x.MessageCategoryId,(List<SelectListItem>)ViewBag.categories,new{@class="form-control"})
+                                    <label for="subject">Message Header</label>
                                 </div>
                             </div>
                             <div class="col-12">

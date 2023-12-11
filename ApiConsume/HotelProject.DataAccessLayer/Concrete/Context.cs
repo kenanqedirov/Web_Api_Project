@@ -11,11 +11,15 @@ namespace HotelProject.DataAccessLayer.Concrete
 {
     public class Context : IdentityDbContext<AppUser,AppRole,int>
     {
-        public Context(DbContextOptions<Context> options) : base(options) 
-        {
-            
-        }
 
+        //public Context(DbContextOptions<Context> options) : base(options)
+        //{
+
+        //}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("server=localhost\\SQL;database=HotelierApiDb;User Id=sa;Password=kenan4258; integrated security = true;");
+        }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Staff> Staffs { get; set; }
@@ -26,5 +30,7 @@ namespace HotelProject.DataAccessLayer.Concrete
         public DbSet<Guest> Guests { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<SendMessage> SendMessages { get; set; }
+        public DbSet<MessageCategory> MessageCategories { get; set; }
+        public DbSet<WorkLocation> WorkLocations { get; set; }
     }
 }
