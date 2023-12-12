@@ -1,15 +1,17 @@
-﻿@model List<ResultAppUserDto>
+﻿@model List<HotelProject.WebUI.Dtos.AppUserDto.ResultAppUserListDto>
+
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "UserList";
     Layout = "~/Views/AdminLayout/_AdminLayout.cshtml";
 }
+
+<h1>UserList</h1>
 
 <div class="table-responsive">
     <table class="table table-xs mb-0">
         <thead>
             <tr>
                 <th>Users</th>
-                <th>Work Departmant</th>
                 <th>City</th>
                 <th>Country</th>
                 <th>Status</th>
@@ -21,7 +23,6 @@
             {
                 <tr>
                     <td><img src="@item.ImageUrl" class=" rounded-circle mr-3" alt="">@item.Name @item.Surname</td>
-                    <td>@item.WorkDepartmant</td>
                     <td>@item.City</td>
                     <td>
                         <span>@item.Country</span>
@@ -46,7 +47,7 @@
                             </div>
                         </td>
                     }
-
+                  
                     @if (item.Gender == "Male")
                     {
                         <td><i class="fa fa-circle-o text-success  mr-2"></i>Male</td>
@@ -54,7 +55,7 @@
                     else
                     {
                         <td><i class="fa fa-circle-o text-warning  mr-2"></i>Female</td>
-                    }
+                    }                   
                 </tr>
             }
         </tbody>
